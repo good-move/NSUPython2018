@@ -50,7 +50,7 @@ def open_file_binary(file_path):
 def rmse(estimated_frequencies: Dict[int, float], true_freqs: Dict[str, float], encoding: str)-> float:
     error = 0
     for int_byte in estimated_frequencies:
-        utf_8_char = bytes([int_byte]).decode(encoding=encoding)
+        utf_8_char = bytes([int_byte]).decode(encoding=encoding).lower()
         true_freq = 0 if utf_8_char not in true_freqs else true_freqs[utf_8_char]
         error += (estimated_frequencies[int_byte] - true_freq) ** 2
     error = math.sqrt(error) / len(estimated_frequencies)
@@ -79,7 +79,7 @@ def read_true_frequencies(path: str) -> Dict[str, float]:
     with open(path) as file:
         for line in file:
             l = [item.strip() for item in line.split(delimiter)]
-            true_freqs[l[0].strip("\"")] = float(l[1])
+            true_freqs[l[0].strip("\"").lower()] = float(l[1])
 
     return true_freqs
 
