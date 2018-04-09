@@ -76,7 +76,7 @@ def count_decile(file: io.IOBase) -> int:
         if sum(heap_counters.values()) + diff > heap_size:
             current_min = heap[0]
             next_min = heapq.heappop(heap)
-            while current_min != next_min:
+            while current_min == next_min:
                     next_min = heapq.heappop(heap)
             decile = next_min
         else:
