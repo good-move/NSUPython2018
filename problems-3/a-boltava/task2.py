@@ -1,5 +1,6 @@
 import heapq
 import math
+import sys
 import io
 
 
@@ -26,7 +27,7 @@ def _get_dataset_size(file: io.IOBase) -> int:
     return dataset_size
 
 
-def count_decile(file: io.IOBase) -> int:
+def count_decile(file) -> int:
     dataset_size = _get_dataset_size(file)
     file.seek(0)
 
@@ -48,3 +49,16 @@ def count_decile(file: io.IOBase) -> int:
         heapq.heappushpop(heap, current_value)
 
     return heap[0]
+
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        file_name = sys.argv[1]
+        try:
+            file = open(file_name, "r")
+            decile = count_decile(file)
+            print("Computed decile: " + str(decile))
+        except Exception as e:
+            print(e, file=sys.stderr)
+    else:
+        print("Usage: python {0} path".format(sys.argv[0]))
