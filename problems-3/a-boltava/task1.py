@@ -40,8 +40,8 @@ def get_statistics(file):
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         file_name = sys.argv[1]
-        file = open(file_name, "r")
         try:
+            file = open(file_name, "r")
             mean, variance = get_statistics(file)
             print("Mean: " + str(mean))
             print("Variance: " + str(variance))
