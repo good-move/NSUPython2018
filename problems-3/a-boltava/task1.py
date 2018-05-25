@@ -1,5 +1,7 @@
 import sys
 
+import math
+
 
 def get_statistics(file):
     # skip all lines including first "open ..."
@@ -32,7 +34,7 @@ def get_statistics(file):
         EX = plain_sum / items_count
         EX2 = squares_sum / items_count
         mean = EX
-        variance = EX2 - EX ** 2
+        variance = math.sqrt(EX2 - EX ** 2)
 
     return mean, variance
 
